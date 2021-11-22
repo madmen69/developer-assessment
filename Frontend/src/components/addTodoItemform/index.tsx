@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { todoItemCreate } from '../../store/todoItems/slice'
-import { errorMessageSelector } from '../../store/todoItems/selectors'
+import { createErrorMessageSelector } from '../../store/todoItems/selectors'
 
 import { Form, Button, Container, Row, Col, Stack, Spinner } from 'react-bootstrap'
 
@@ -9,7 +9,7 @@ import './index.scss'
 
 export const AddTodoItemForm = () => {
     const dispatch = useDispatch()
-    const errorMessage = useSelector(errorMessageSelector)
+    const createErrorMessage = useSelector(createErrorMessageSelector)
 
     const [value, setValue] = useState('')
     const handleChange = (event) => {
@@ -37,8 +37,10 @@ export const AddTodoItemForm = () => {
                                 type="input"
                                 placeholder="Enter description..."
                             />
-                            <Form.Text className={errorMessage && 'error'}>
-                                {!errorMessage ? 'Complete the todo item form with description' : errorMessage}
+                            <Form.Text className={createErrorMessage && 'error'}>
+                                {!createErrorMessage
+                                    ? 'Complete the todo item form with description'
+                                    : createErrorMessage}
                             </Form.Text>
                         </Form.Group>
                         <Stack direction="horizontal" gap={2}>

@@ -22,7 +22,7 @@ describe('Add Todo Item form', () => {
                 store={getMockStore({
                     entities: {
                         '5e3a7ad5-a282-4a27-94d3-20b21c925749': {
-                            todoItemId: '5e3a7ad5-a282-4a27-94d3-20b21c925749',
+                            id: '5e3a7ad5-a282-4a27-94d3-20b21c925749',
                             description: 'hell',
                             isCompleted: false,
                         },
@@ -44,7 +44,7 @@ describe('Add Todo Item form', () => {
                 store={getMockStore({
                     entities: {
                         '5e3a7ad5-a282-4a27-94d3-20b21c925749': {
-                            todoItemId: '5e3a7ad5-a282-4a27-94d3-20b21c925749',
+                            id: '5e3a7ad5-a282-4a27-94d3-20b21c925749',
                             description: 'hell',
                             isCompleted: true,
                         },

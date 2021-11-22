@@ -1,8 +1,8 @@
 import { createEntityAdapter } from '@reduxjs/toolkit'
 
-export type TodoItem = { todoItemId: string; description: string; isCompleted: boolean }
+export type TodoItem = { id: string; description: string; isCompleted: boolean }
 
 export const todoItemsAdapter = createEntityAdapter<TodoItem>({
-    selectId: (todoItem) => todoItem.todoItemId,
+    selectId: (todoItem) => todoItem.id,
     sortComparer: (a, b) => a.description.localeCompare(b.description),
 })

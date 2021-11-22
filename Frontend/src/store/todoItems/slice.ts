@@ -2,7 +2,7 @@ import { createSlice, PayloadAction, combineReducers, createAction } from '@redu
 import { todoItemsAdapter, TodoItem } from './entities'
 
 export const initialState = todoItemsAdapter.getInitialState({
-    errorMessage: '',
+    createErrorMessage: '',
 })
 
 const todoItemsSlice = createSlice({
@@ -10,14 +10,15 @@ const todoItemsSlice = createSlice({
     initialState,
     reducers: {
         todoItemCreate: (state, action: PayloadAction<string>) => {
-            state.errorMessage = ''
+            state.createErrorMessage = ''
         },
         todoItemCreateFailed: (state, action: PayloadAction<string>) => {
-            state.errorMessage = action.payload
+            state.createErrorMessage = action.payload
         },
         todoItemAdded: todoItemsAdapter.addOne,
-        todoItemsRefresh: (state, action) => {
+        todoItemsRefresh: (state) => {
             state.entities = {}
+            state.ids = []
         },
         todoItemsReceived: (state, action) => {
             todoItemsAdapter.setAll(state, action.payload)
@@ -28,8 +29,14 @@ const todoItemsSlice = createSlice({
 
 export const todoItemUpdate = createAction<TodoItem>('todoItems/todoItemUpdate')
 
-export const { todoItemCreate, todoItemAdded, todoItemsReceived, todoItemUpdated, todoItemsRefresh } =
-    todoItemsSlice.actions
+export const {
+    todoItemCreate,
+    todoItemAdded,
+    todoItemsReceived,
+    todoItemUpdated,
+    todoItemsRefresh,
+    todoItemCreateFailed,
+} = todoItemsSlice.actions
 
 export const rootReducer = combineReducers({
     todoItems: todoItemsSlice.reducer,

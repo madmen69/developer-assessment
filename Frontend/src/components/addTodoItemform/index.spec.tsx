@@ -22,7 +22,7 @@ describe('Add Todo Item form', () => {
 
     it('should render the error message when it exist', async () => {
         render(
-            <Provider store={getMockStore({ errorMessage: 'I got an error' })}>
+            <Provider store={getMockStore({ createErrorMessage: 'I got an error' })}>
                 <AddTodoItemForm />
             </Provider>
         )

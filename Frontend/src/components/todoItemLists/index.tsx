@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, Row, Col, Table, Button, Stack } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { TodoItem } from '../../store/todoItems/entities'
 import { todoItemsSelector } from '../../store/todoItems/selectors'
-import { todoItemUpdate } from '../../store/todoItems/slice'
+import { todoItemsRefresh, todoItemUpdate } from '../../store/todoItems/slice'
 
 import './index.scss'
 
@@ -13,13 +13,17 @@ export const TodoItemLists = () => {
     const count = allTodoItems.length
     const heading = `Showing ${count} item${count > 1 ? 's' : ''}`
 
+    useEffect(() => {
+        dispatch(todoItemsRefresh())
+    }, [])
+
     return (
         <Container className="marginSpacing">
             <Row>
                 <Col>
                     <Stack direction="horizontal" gap={3}>
                         <h1>{heading}</h1>
-                        <Button variant="primary" type="button">
+                        <Button variant="primary" type="button" onClick={() => dispatch(todoItemsRefresh())}>
                             Refresh
                         </Button>
                     </Stack>
@@ -33,8 +37,8 @@ export const TodoItemLists = () => {
                         </thead>
                         <tbody>
                             {allTodoItems.map((item: TodoItem) => (
-                                <tr key={item.todoItemId}>
-                                    <td>{item.todoItemId}</td>
+                                <tr key={item.id}>
+                                    <td>{item.id}</td>
                                     <td>{item.description}</td>
                                     <td>
                                         <Button
